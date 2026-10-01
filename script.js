@@ -13,7 +13,7 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  return prompt("Qual você escolhe?");
+  return prompt("Qual você escolhe?").toLowerCase();
 }
 
 let humanScore = 0;
@@ -23,14 +23,8 @@ function playRound() {
   let humanChoice = getHumanChoice();
   let computerChoice = getComputerChoice();
 
-  console.log(`Escolha do player: ${humanChoice}`);
-  console.log(`Escolha da Maquina: ${computerChoice}`);
-
   if (humanChoice === computerChoice) {
     console.log("Empate!");
-
-    console.log("Humano:" + humanScore);
-    console.log("Computador:" + computerScore);
   } else if (
     (humanChoice === "pedra" && computerChoice === "tesoura") ||
     (humanChoice === "papel" && computerChoice === "pedra") ||
@@ -39,16 +33,28 @@ function playRound() {
     humanScore++;
 
     console.log(`${humanChoice} ganhou! ponto para humano!`);
-
-    console.log("Humano:" + humanScore);
-    console.log("Computador:" + computerScore);
   } else {
     computerScore++;
 
     console.log(`${computerChoice} ganhou! ponto para o computador!`);
-    console.log("Humano:" + humanScore);
-    console.log("Computador:" + computerScore);
   }
 }
 
-playRound();
+function playGame() {
+  for (let i = 0; i < 5; i++) {
+    playRound();
+  }
+
+  console.log("Humano:" + humanScore);
+  console.log("Computador:" + computerScore);
+
+  if (humanScore > computerScore) {
+    console.log("Humano ganhou");
+  } else if (computerScore > humanScore) {
+    console.log("maquina ganhou");
+  } else {
+    console.log("Empate!");
+  }
+}
+
+playGame();
